@@ -1,0 +1,27 @@
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous">
+
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="alert alert-info">{{ todo_count }} Current Todo{{ todo_count|pluralize }}</h1>
+    <hr>
+    {% for todo in todos %}
+        <a href="{% url 'view_todo' todo.id %}">
+            {% if todo.important %}
+                <h5 class="alert alert-warning">{{ todo.title }}</h5>
+            {% else %}
+                <h5 class="alert alert-success">{{ todo.title }}</h5>
+            {% endif %}
+        </a>
+        <hr>
+    {% endfor %}
+    <a href="{% url 'create' %}" class="btn btn-primary">Create new todo</a>
+    <a href="{% url 'completed_todos' %}" class="btn btn-primary">View completed todos</a>
+</div>
+
+{% endblock %}

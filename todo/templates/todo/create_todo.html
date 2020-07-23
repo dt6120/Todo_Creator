@@ -1,0 +1,23 @@
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous">
+
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="alert alert-info">Create</h1>
+
+    <h2>{{ error }}</h2>
+
+    <form method="post">
+        <hr>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{% url 'current_todos' %}" class="btn btn-primary">Back</a>
+        <hr>
+    </form>
+</div>
+{% endblock %}

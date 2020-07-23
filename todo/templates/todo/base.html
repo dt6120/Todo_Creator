@@ -1,0 +1,19 @@
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous">
+
+{% if user.is_authenticated %}
+    <h5>Welcome <b>{{ user.username }}</b></h5>
+
+    <form action="{% url 'logout_user' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Logout</button>
+    </form>
+
+{% else %}
+    <a href="{% url 'signup_user' %}" class="btn btn-primary">Sign Up</a>
+    <a href="{% url 'login_user' %}" class="btn btn-primary">Login</a>
+{% endif %}
+
+{% block content %}{% endblock %}

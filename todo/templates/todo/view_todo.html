@@ -1,0 +1,62 @@
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous">
+
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<style>
+    #edit_todo {
+        display: none;
+    }
+</style>
+
+<div class="container" id="view_todo">
+    <h1 class="alert alert-info container">View todo</h1>
+    <hr>
+    <h2>{{ todo.title }}</h2>
+    <h5>{{ todo.memo }}</h5>
+    <h7>Created on: {{ todo.created_on }}</h7>
+    <hr>
+    <a href="#" class="btn btn-primary" id="edit_btn">Edit</a>
+    <form method="post" action="{% url 'complete_todo' todo.id %}">
+        {% csrf_token %}
+        <button class="submit btn btn-primary">Mark as done</button>
+    </form>
+    <form method="post" action="{% url 'delete_todo' todo.id %}">
+        {% csrf_token %}
+        <button class="submit btn btn-primary">Delete</button>
+    </form>
+    <a href="{% url 'current_todos' %}" class="btn btn-primary">Back</a>
+</div>
+
+<div class="container" id="edit_todo">
+    <h1 class="alert alert-info">Edit todo</h1>
+
+    <h2>{{ error }}</h2>
+
+    <form method="post" action="{% url 'edit_todo' todo.id %}">
+        <hr>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="#" class="btn btn-primary" id="close">Discard</a>
+        <hr>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $("#edit_btn").click(function(){
+        $("#view_todo").hide(500);
+        $("#edit_todo").show(500);
+    });
+    $("#close").click(function(){
+        $("#edit_todo").hide(500);
+        $("#view_todo").show(500);
+    });
+</script>
+
+{% endblock %}

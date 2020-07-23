@@ -1,0 +1,24 @@
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous">
+
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="alert alert-info">{{ todo_count }} Completed Todos</h1>
+    <hr>
+    {% for todo in todos %}
+        {% if todo.important %}
+            <h5 class="alert alert-warning">{{ todo.title }} - Completed {{ todo.completed_on|date:'M j Y H:i' }}</h5>
+        {% else %}
+            <h5 class="alert alert-success">{{ todo.title }}&emsp;{{ todo.completed_on|date:'M j Y H:i' }}</h5>
+        {% endif %}
+        <hr>
+    {% endfor %}
+    <a href="{% url 'current_todos' %}" class="btn btn-primary">Back</a>
+</div>
+
+{% endblock %}

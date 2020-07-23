@@ -1,0 +1,32 @@
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous">
+
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="alert alert-info">Edit todo</h1>
+
+    <h2>{{ error }}</h2>
+
+    <form method="post">
+        <hr>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{% url 'view_todo' todo.id %}" class="btn btn-primary" onclick="myFunction()">Discard</a>
+        <hr>
+    </form>
+</div>
+
+<script>
+function myFunction() {
+  var choice = confirm("Are you sure? All changes will be lost.");
+  if (choice) {
+    pass;
+  }
+</script>
+
+{% endblock %}
